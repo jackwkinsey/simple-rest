@@ -1,0 +1,28 @@
+{
+  "name": "rest-server",
+  "version": "1.0.0",
+  "description": "Simple REST server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackwkinsey/simple-rest.git"
+  },
+  "keywords": [
+    "REST",
+    "example"
+  ],
+  "author": "Jack Kinsey <jack.w.kinsey@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jackwkinsey/simple-rest/issues"
+  },
+  "homepage": "https://github.com/jackwkinsey/simple-rest#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.4"
+  }
+}
