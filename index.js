@@ -4,6 +4,23 @@ const server = express();
 // Get the Mongoose models used for querying the database
 const { User } = require('./models.js');
 
+// Listen for all GET requests to /users
+server.get('/users', (req, res) => {
+  /**
+   * Find all of the users in the database collection. (We pass in an empty
+   * collection as we aren't filtering the results)
+   */
+  User.find({}, (error, users) => {
+    if (error) {
+      // The DB returned an error so we return a 500 error.
+      return res.status(500).end(error);
+    }
+
+    // Return the array of users to the client, serialized as a JSON string.
+    res.send(users);
+  });
+});
+
 /**
  * Listen for all GET requests to /users/:id URL
  * where the ID is the ID of the user account
