@@ -4,6 +4,26 @@ const server = express();
 // Get the Mongoose models used for querying the database
 const { User } = require('./models.js');
 
+// Filter a user object based on the requested fields
+const filterFields = (req, user) => {
+  const { fields } = req.query;
+
+  // If no fields were specified we return all of them.
+  if (!fields) {
+    return user;
+  }
+
+  /**
+   * Otherwise, we assume the fields are a comma-separated list of field
+   * names, and we generate a new object that contains only those fields.
+   */
+  const filteredUser = {};
+  for (const field of fields.split(',')) {
+    filteredUser[field] = user[field]; // cannot set "name" of object?
+  }
+  return filteredUser;
+};
+
 // Listen for all GET requests to /users
 server.get('/users', (req, res) => {
   /**
@@ -17,7 +37,7 @@ server.get('/users', (req, res) => {
     }
 
     // Return the array of users to the client, serialized as a JSON string.
-    res.send(users);
+    res.send(users.map(user => filterFields(req, user)));
   });
 });
 
@@ -42,7 +62,7 @@ server.get('/users/:id', (req, res) => {
     }
 
     // Return the user to the client, serialized as a JSON string.
-    res.send(user);
+    res.send(filterFields(req, user));
   });
 });
 
