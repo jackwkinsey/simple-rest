@@ -19,7 +19,7 @@ const filterFields = (req, user) => {
    */
   const filteredUser = {};
   for (const field of fields.split(',')) {
-    filteredUser[field] = user[field]; // cannot set "name" of object?
+    filteredUser[field] = user[field];
   }
   return filteredUser;
 };
